@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en" ng-app>
+  <head>
+    <title>vueJS-router example with weUI style</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="./css/weui.css" rel="stylesheet">
+    <!--
+        You have to set documrnt default style with html and body's height(100%).
+        If you want to match weUI example, you should include the weui-example.css file.
+    -->
+    <link href="./css/weui-example.css" rel="stylesheet">
+  </head>
+  <body>
+    <!-- root element -->
+    <div id="app" class="container">
+      <div class="tabbar">
+        <!-- content area -->
+        <div class="weui_tab_bd">
+            <!--
+                You can insert any element or text in block
+            -->
+            <p>Content area....<p>
+            <router-view></router-view>
+        </div>
+        <!-- WeUI tabbar area -->
+        <div id="tabbar" class="weui_tabbar">
+          <a v-link="{ path: '/TestA' }"
+             class="weui_tabbar_item">
+            <div class="weui_tabbar_icon">
+              <img src="http://weui.io/images/icon_nav_button.png" alt="">
+            </div>
+            <p class="weui_tabbar_label">TestA</p>
+          </a>
+          <a v-link="{ path: '/TestB' }"
+             class="weui_tabbar_item">
+            <div class="weui_tabbar_icon">
+              <img src="http://weui.io/images/icon_nav_msg.png" alt="">
+            </div>
+            <p class="weui_tabbar_label">TestB</p>
+          </a>
+          <a v-link="{ path: '/TestC' }"
+             class="weui_tabbar_item">
+            <div class="weui_tabbar_icon">
+              <img src="http://weui.io/images/icon_nav_article.png" alt="">
+            </div>
+            <p class="weui_tabbar_label">TestC</p>
+          </a>
+          <a v-link="{ path: '/TestD' }"
+             class="weui_tabbar_item">
+            <div class="weui_tabbar_icon">
+              <img src="http://weui.github.io/weui/images/icon_nav_button.png" alt="">
+            </div>
+            <p class="weui_tabbar_label">TestD</p>
+          </a>
+          <a v-link="{ path: '/TestE' }"
+             class="weui_tabbar_item">
+            <div class="weui_tabbar_icon">
+              <img src="http://weui.github.io/weui/images/icon_nav_msg.png" alt="">
+            </div>
+            <p class="weui_tabbar_label">TestE</p>
+          </a>
+      </div>
+    </div>
+    <!-- Include jquery from googleapis -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/vue/1.0.24/vue.js"></script>
+    <script src="js/vue-router.js"></script>
+    <script>
+    // define some components
+    var TestA = Vue.extend({
+      template: '<p>I am a Test A</p>'
+    });
+    var TestB = Vue.extend({
+      template: '<p>I am a Test B</p>'
+    });
+    var TestC = Vue.extend({
+      template: '<p>I am a Test C</p>'
+    });
+    var TestD = Vue.extend({
+      template: '<p>I am a Test D</p>'
+    });
+    var TestE = Vue.extend({
+      template: '<p>I am a Test E</p>'
+    });
+
+    // the router needs a root component to render.
+    // for demo purposes, we will just use an empty one
+    // because we are using the HTML as the app template.
+    var App = Vue.extend({});
+
+    // create a router instance
+    // you can pass in additional options here, but
+    // let's keep it simple for now.
+    var router = new VueRouter();
+
+    // define some routes.
+    // each route should map to a component.
+    // we'll talk about nested routes later.
+    router.map({
+      '/TestA': {
+        component: TestA
+      },
+      '/TestB': {
+        component: TestB
+      },
+      '/TestC': {
+        component: TestC
+      },
+      '/TestD': {
+        component: TestD
+      },
+      '/TestE': {
+        component: TestE
+      }
+    });
+    router.start(App, '#app');
+    //Use jquery function to set 'onclick' event with all 'a' element.
+    //Jquery's 'on' function reference 'http://api.jquery.com/on/'
+    $('#tabbar').on('click', '.weui_tabbar_item', function () {
+        //Set event function with all element.
+        $(this).addClass('weui_bar_item_on').
+            siblings('.weui_bar_item_on').
+                removeClass('weui_bar_item_on');
+    });
+    </script>
+  </body>
+</html>
